@@ -1,10 +1,11 @@
 import React from "react";
+import GlobalStyle from "./components/GlobalStyle";
 import AboutUs from "./pages/AboutUs";
 
 function App() {
   return (
     <div className="App">
-      <h1>Film</h1>
+      <GlobalStyle />
       <AboutUs />
     </div>
   );
