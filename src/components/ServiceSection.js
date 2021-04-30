@@ -6,53 +6,63 @@ import teamwork from "../img/teamwork.svg";
 import home2 from "../img/home2.png";
 import { About, Image, Description } from "../styles";
 import styled from "styled-components";
+import { useScroll } from "./useScroll";
+import { scrollReveal } from "../animation";
 
 const ServiceSection = () => {
+  const [element, animator] = useScroll();
   return (
-    <Services>
-      <Description>
-        <h2>
-          High <span>quality</span> services
-        </h2>
-        <Cards>
-          <Card>
-            <div className="icon">
-              <img src={clock} alt="Clock"></img>
-              <h3>Efficient</h3>
-            </div>
-            <p>lorem blah blah blah</p>
-          </Card>
+    <Hidden>
+      <Services
+        variants={scrollReveal}
+        initial="hidden"
+        animate={animator}
+        ref={element}
+      >
+        <Description>
+          <h2>
+            High <span>quality</span> services
+          </h2>
+          <Cards>
+            <Card>
+              <div className="icon">
+                <img src={clock} alt="Clock"></img>
+                <h3>Efficient</h3>
+              </div>
+              <p>lorem blah blah blah</p>
+            </Card>
 
-          <Card>
-            <div className="icon">
-              <img src={teamwork} alt="teamwork"></img>
-              <h3>Teamwork</h3>
-            </div>
-            <p>lorem blah blah blah</p>
-          </Card>
+            <Card>
+              <div className="icon">
+                <img src={teamwork} alt="teamwork"></img>
+                <h3>Teamwork</h3>
+              </div>
+              <p>lorem blah blah blah</p>
+            </Card>
 
-          <Card>
-            <div className="icon">
-              <img src={diaphragm} alt="diaphragm"></img>
-              <h3>Diaphragm</h3>
-            </div>
-            <p>lorem blah blah blah</p>
-          </Card>
+            <Card>
+              <div className="icon">
+                <img src={diaphragm} alt="diaphragm"></img>
+                <h3>Diaphragm</h3>
+              </div>
+              <p>lorem blah blah blah</p>
+            </Card>
 
-          <Card>
-            <div className="icon">
-              <img src={money} alt="money"></img>
-              <h3>Affordable</h3>
-            </div>
-            <p>lorem blah blah blah</p>
-          </Card>
-        </Cards>
-      </Description>
+            <Card>
+              <div className="icon">
+                <img src={money} alt="money"></img>
+                <h3>Affordable</h3>
+              </div>
+              <p>lorem blah blah blah</p>
+            </Card>
+          </Cards>
+        </Description>
 
-      <Image>
-        <img src={home2} alt="home2"></img>
-      </Image>
-    </Services>
+        <Image>
+          <img src={home2} alt="home2"></img>
+        </Image>
+      </Services>
+    </Hidden>
   );
 };
 
@@ -91,6 +101,10 @@ const Card = styled.div`
       padding: 1rem;
     }
   }
+`;
+
+const Hidden = styled.div`
+  overflow: hidden;
 `;
 
 export default ServiceSection;
