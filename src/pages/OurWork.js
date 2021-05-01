@@ -7,9 +7,19 @@ import theracer from "../img/theracer-small.png";
 import goodtimes from "../img/goodtimes-small.png";
 //Animations
 import { motion } from "framer-motion";
-import { pageAnimation, fade, photoAnim, lineAnim, slider } from "../animation";
+import {
+  pageAnimation,
+  fade,
+  photoAnim,
+  lineAnim,
+  slider,
+  sliderContainer,
+} from "../animation";
+import { useScroll } from "../components/useScroll";
 
 const OurWork = () => {
+  const [element1, view1] = useScroll();
+  const [element2, view2] = useScroll();
   return (
     <Work
       variants={pageAnimation}
@@ -18,10 +28,12 @@ const OurWork = () => {
       exit="exit"
       style={{ background: "#ffffff", transition: { duration: 1 } }}
     >
-      <Frame1 variants={slider}></Frame1>
-      <Frame2 variants={slider}></Frame2>
-      <Frame3 variants={slider}></Frame3>
-      <Frame4 variants={slider}></Frame4>
+      <motion.div variants={sliderContainer}>
+        <Frame1 variants={slider}></Frame1>
+        <Frame2 variants={slider}></Frame2>
+        <Frame3 variants={slider}></Frame3>
+        <Frame4 variants={slider}></Frame4>
+      </motion.div>
       <Movie>
         <motion.h2 variants={fade}>The Athlete</motion.h2>
         <motion.div variants={lineAnim} className="line"></motion.div>
@@ -36,17 +48,17 @@ const OurWork = () => {
         </Link>
       </Movie>
 
-      <Movie>
+      <Movie variants={fade} ref={element1} initial="hidden" animate={view1}>
         <h2>The Racer</h2>
-        <div className="line"></div>
+        <motion.div variants={lineAnim} className="line"></motion.div>
         <Link to="/work/the-racer">
           <img src={theracer} alt="theracer"></img>
         </Link>
       </Movie>
 
-      <Movie>
+      <Movie variants={fade} ref={element2} initial="hidden" animate={view2}>
         <h2>Good Times</h2>
-        <div className="line"></div>
+        <motion.div variants={lineAnim} className="line"></motion.div>
         <Link to="/work/good-times">
           <img src={goodtimes} alt="goodTimes"></img>
         </Link>
@@ -64,7 +76,7 @@ const Work = styled(motion.div)`
   }
 `;
 
-const Movie = styled.div`
+const Movie = styled(motion.div)`
   padding-bottom: 10rem;
   .line {
     height: 0.2rem;
