@@ -3,7 +3,7 @@ import { useInView } from "react-intersection-observer";
 
 export const useScroll = () => {
   const animator = useAnimation();
-  const [element, view] = useInView({ threshold: 0.5 });
+  const [element, view] = useInView({ threshold: 0.3 });
 
   if (view) {
     animator.start("show");
